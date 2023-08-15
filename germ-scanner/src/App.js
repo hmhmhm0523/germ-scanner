@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+
+import React, { useRef } from "react";
+import Camera from "./components/Camera";
+import HandMaskCanvas from "./components/HandMaskCanvas";
+import detectHand from "./HandDetection";
 
 function App() {
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  const processFrame = (videoElement, canvasElement) => {
+    detectHand(videoElement, canvasElement);
+    requestAnimationFrame(() => processFrame(videoElement, canvasElement));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Camera onLoaded={() => processFrame(videoRef.current, canvasRef.current)} ref={videoRef} />
+      <HandMaskCanvas videoRef={videoRef} processFrame={processFrame} />
     </div>
   );
 }
