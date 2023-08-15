@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/germ-scanner/static/css/main.073c9b0a.css",
-    "main.js": "/germ-scanner/static/js/main.bc9572d9.js",
+    "main.css": "/germ-scanner/static/css/main.e6c13ad2.css",
+    "main.js": "/germ-scanner/static/js/main.3e8afac4.js",
     "static/js/787.0bc4dd9c.chunk.js": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js",
-    "static/media/logo.svg": "/germ-scanner/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/germ-scanner/index.html",
-    "main.073c9b0a.css.map": "/germ-scanner/static/css/main.073c9b0a.css.map",
-    "main.bc9572d9.js.map": "/germ-scanner/static/js/main.bc9572d9.js.map",
+    "main.e6c13ad2.css.map": "/germ-scanner/static/css/main.e6c13ad2.css.map",
+    "main.3e8afac4.js.map": "/germ-scanner/static/js/main.3e8afac4.js.map",
     "787.0bc4dd9c.chunk.js.map": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.bc9572d9.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.3e8afac4.js"
   ]
 }
