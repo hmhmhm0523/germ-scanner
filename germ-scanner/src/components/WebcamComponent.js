@@ -5,11 +5,19 @@ import './WebcamComponent.scss';
 // eslint-disable-next-line no-unused-vars
 import * as tf from '@tensorflow/tfjs';
 import germImage from '../assets/Germ.png';
+import germImage1 from '../assets/Germ1.png';
+import germImage2 from '../assets/Germ2.png';
+import germImage3 from '../assets/Germ3.png';
+
+
 
 const WebcamComponent = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const isDetectionRunning = useRef(true);
+
+  const germImages = [germImage1, germImage2, germImage3];  // ... add all germ images
+
 
   const [isFrozen, setIsFrozen] = useState(false);
   const [model, setModel] = useState(null);
@@ -17,6 +25,10 @@ const WebcamComponent = () => {
   const [germCount, setGermCount] = useState(1);
   const [predictions, setPredictions] = useState([]);
   const [germLandmarkIndices, setGermLandmarkIndices] = useState([]);
+  const [germImageIndex, setGermImageIndex] = useState(0);
+  const [facingMode, setFacingMode] = useState('user'); // 'user' for front, 'environment' for back
+
+
 
 
   const updateGermLandmarks = (landmarkCount) => {
@@ -40,7 +52,7 @@ const WebcamComponent = () => {
       germLandmarkIndices.forEach(index => {
         const point = prediction.landmarks[index];
         const img = document.createElement('img');
-        img.src = germImage;
+        img.src = germImages[germImageIndex];
         img.style.position = 'absolute';
         img.style.left = `${(point[0] - 640 / 2) * ScaleFactor + (containerWidth / 2)}px`;
         img.style.top = `${(point[1] - 480 / 2) * ScaleFactor + (containerHeight / 2)}px`;
@@ -61,13 +73,45 @@ const WebcamComponent = () => {
   const startWebcam = async () => {
     setShowWelcome(false);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const constraints = {
+        video: {
+          facingMode: facingMode,
+          torch: facingMode === 'environment' // Only activate torch for back camera
+        }
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
-      videoRef.current.play().then(() => detectHands());
+
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(async () => {
+          await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay
+          detectHands();
+        }).catch(error => {
+          console.error("Auto-play was prevented:", error);
+        });
+      }
     } catch (err) {
       console.error("Error accessing webcam:", err);
     }
   };
+
+  const toggleCamera = async () => {
+    // Toggle between 'user' and 'environment'
+    const newFacingMode = facingMode === 'user' ? 'environment' : 'user';
+    setFacingMode(newFacingMode);
+
+    // Stop all tracks of the current stream
+    if (videoRef.current.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+    }
+
+    // Restart the webcam with the new facing mode
+    startWebcam();
+  };
+
+
 
   const detectHands = async () => {
     if (!videoRef.current) return;
@@ -107,6 +151,12 @@ const WebcamComponent = () => {
     }
   }, [germCount, predictions]);
 
+  useEffect(() => {
+    const newIndex = Math.floor(Math.random() * germImages.length);
+    setGermImageIndex(newIndex);
+  }, [germCount]);
+
+
   return (
     <div className="video-container">
       {showWelcome ? (
@@ -136,9 +186,14 @@ const WebcamComponent = () => {
           {isFrozen ? (
             <button onClick={toggleFreeze}>Retry</button>
           ) : (
-            <button className="freeze-button" onClick={toggleFreeze}>
-              Freeze
-            </button>
+            <>
+              <button className="freeze-button" onClick={toggleFreeze}>
+                Freeze
+              </button>
+              <button onClick={toggleCamera}>
+                Toggle to {facingMode === 'user' ? 'Back Camera' : 'Front Camera'}
+              </button>
+            </>
           )}
 
         </>
