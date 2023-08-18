@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/germ-scanner/static/css/main.76def0e7.css",
-    "main.js": "/germ-scanner/static/js/main.4a588148.js",
+    "main.js": "/germ-scanner/static/js/main.d40c3521.js",
     "static/js/787.0bc4dd9c.chunk.js": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js",
+    "static/media/Germ2.png": "/germ-scanner/static/media/Germ2.c558ad6b5f65c4b912e5.png",
     "index.html": "/germ-scanner/index.html",
     "main.76def0e7.css.map": "/germ-scanner/static/css/main.76def0e7.css.map",
-    "main.4a588148.js.map": "/germ-scanner/static/js/main.4a588148.js.map",
+    "main.d40c3521.js.map": "/germ-scanner/static/js/main.d40c3521.js.map",
     "787.0bc4dd9c.chunk.js.map": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.76def0e7.css",
-    "static/js/main.4a588148.js"
+    "static/js/main.d40c3521.js"
   ]
 }
