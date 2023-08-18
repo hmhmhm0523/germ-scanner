@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/germ-scanner/static/css/main.a9229c2b.css",
+    "main.css": "/germ-scanner/static/css/main.b9bffabd.css",
     "main.js": "/germ-scanner/static/js/main.279251f9.js",
     "static/js/787.0bc4dd9c.chunk.js": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js",
-    "static/media/GermScannerBG_sq.svg": "/germ-scanner/static/media/GermScannerBG_sq.44a510a288bf230ae59f.svg",
-    "static/media/GermScannerBG.svg": "/germ-scanner/static/media/GermScannerBG.07dd54dcb5cb6db82882.svg",
-    "static/media/GermScannerBG_hz.svg": "/germ-scanner/static/media/GermScannerBG_hz.8d56aeff1dddfd6824a2.svg",
+    "static/media/GermScannerBG_sq.svg": "/germ-scanner/static/media/GermScannerBG_sq.7b2d4145a45031fb2254.svg",
+    "static/media/GermScannerBG.svg": "/germ-scanner/static/media/GermScannerBG.ec1bbe31da61b280926f.svg",
+    "static/media/GermScannerBG_hz.svg": "/germ-scanner/static/media/GermScannerBG_hz.bbe81065d71fe8159078.svg",
     "static/media/Germ2.svg": "/germ-scanner/static/media/Germ2.a2a51cafad4a27b0be82565b1c0f2aa2.svg",
     "static/media/Germ3.svg": "/germ-scanner/static/media/Germ3.cc3caa09bbf3a85f76477c9ab91aa5b5.svg",
     "static/media/Germ4.svg": "/germ-scanner/static/media/Germ4.4e898f35d43a8eff91e8d6a8ee70806d.svg",
     "static/media/Germ1.svg": "/germ-scanner/static/media/Germ1.df48f020d05c68326c45771db35c2e01.svg",
     "index.html": "/germ-scanner/index.html",
-    "main.a9229c2b.css.map": "/germ-scanner/static/css/main.a9229c2b.css.map",
+    "main.b9bffabd.css.map": "/germ-scanner/static/css/main.b9bffabd.css.map",
     "main.279251f9.js.map": "/germ-scanner/static/js/main.279251f9.js.map",
     "787.0bc4dd9c.chunk.js.map": "/germ-scanner/static/js/787.0bc4dd9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9229c2b.css",
+    "static/css/main.b9bffabd.css",
     "static/js/main.279251f9.js"
   ]
 }
