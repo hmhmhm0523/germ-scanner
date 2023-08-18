@@ -1,23 +1,13 @@
 // src/App.js
 
-import React, { useRef } from "react";
-import Camera from "./components/Camera";
-import HandMaskCanvas from "./components/HandMaskCanvas";
-import detectHand from "./HandDetection";
+import React from 'react';
+import './App.css';
+import WebcamComponent from './components/WebcamComponent';
 
 function App() {
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-
-  const processFrame = (videoElement, canvasElement) => {
-    detectHand(videoElement, canvasElement);
-    requestAnimationFrame(() => processFrame(videoElement, canvasElement));
-  };
-
   return (
-    <div>
-      <Camera onLoaded={() => processFrame(videoRef.current, canvasRef.current)} ref={videoRef} />
-      <HandMaskCanvas videoRef={videoRef} processFrame={processFrame} />
+    <div className="App">
+      <WebcamComponent />
     </div>
   );
 }
