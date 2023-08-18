@@ -202,18 +202,50 @@ button.freezeButton:hover {
   transform: translateX(-50%) scale(0.95); /* Combine translate and scale */
 }
 
+// .toast {
+//   position: fixed;
+//   top: 10%;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   background-color: rgba(0,0,0,0.7);
+//   color: white;
+//   padding: 10px 20px 12px 20px;
+//   border-radius: 6px;
+//   font-size: 1.2em;
+//   z-index: 1000;
+// }
+
 .toast {
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0,0,0,0.7);
-  color: white;
-  padding: 10px 20px 12px 20px;
-  border-radius: 6px;
-  font-size: 1.2em;
+  font-size: 2rem; /* Adjust size as needed */
+  font-weight: bold;
+  color: #ffffff; /* White text */
+  text-shadow: 2px 2px 4px #000000; /* Text shadow for depth */
+  background: linear-gradient(to right, #02831c, #02b692); /* Gradient background */
+  border: 5px solid #3bff14; /* Thick pink border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px 40px; /* Padding for spacing */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+  animation: bounce 1s infinite; /* Bouncing animation */
   z-index: 1000;
+
+  span {
+    font-size: 100px;
+  }
 }
+
+/* Bouncing animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-10px);
+  }
+  60% {
+      transform: translateY(-5px);
+  }
+}
+
 
 #toggleCameraBtn {
   width: 70px;

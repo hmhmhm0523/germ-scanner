@@ -162,7 +162,7 @@ const WebcamComponent = () => {
     <div className="video-container">
       {showWelcome ? (
         <div className="welcome-screen">
-          <button onClick={startWebcam}>START NOW 🠊</button>
+          <button onClick={startWebcam}>START NOW</button>
         </div>
       ) : (
         <>
@@ -170,7 +170,7 @@ const WebcamComponent = () => {
           <canvas ref={canvasRef} width="640" height="480"></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
-             germCount == 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast">Found {germCount} germs!</div>)
+             germCount == 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
           ) : (
             <div className="slider">
               {/* Number of Germs: {germCount} */}
