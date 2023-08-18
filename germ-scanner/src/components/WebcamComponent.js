@@ -1,13 +1,15 @@
 // src/components/WebcamComponent.js
 import React, { useRef, useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import * as handpose from '@tensorflow-models/handpose';
 import './WebcamComponent.scss';
 // eslint-disable-next-line no-unused-vars
 import * as tf from '@tensorflow/tfjs';
-import germImage from '../assets/Germ.png';
-import germImage1 from '../assets/Germ1.png';
-import germImage2 from '../assets/Germ2.png';
-import germImage3 from '../assets/Germ3.png';
+import germImage1 from '../assets/Germ1.svg';
+import germImage2 from '../assets/Germ2.svg';
+import germImage3 from '../assets/Germ3.svg';
+import germImage4 from '../assets/Germ4.svg';
+
 
 
 
@@ -16,17 +18,18 @@ const WebcamComponent = () => {
   const canvasRef = useRef(null);
   const isDetectionRunning = useRef(true);
 
-  const germImages = [germImage1, germImage2, germImage3];  // ... add all germ images
+  const germImages = [germImage1, germImage2, germImage3, germImage4];  // ... add all germ images
 
 
   const [isFrozen, setIsFrozen] = useState(false);
   const [model, setModel] = useState(null);
   const [showWelcome, setShowWelcome] = useState(true);
-  const [germCount, setGermCount] = useState(1);
+  const [germCount, setGermCount] = useState(11);
   const [predictions, setPredictions] = useState([]);
   const [germLandmarkIndices, setGermLandmarkIndices] = useState([]);
   const [germImageIndex, setGermImageIndex] = useState(0);
   const [facingMode, setFacingMode] = useState('user'); // 'user' for front, 'environment' for back
+
 
 
 
@@ -37,6 +40,10 @@ const WebcamComponent = () => {
       shuffleArray(indices);
       setGermLandmarkIndices(indices.slice(0, germCount));
     }
+  };
+
+  const incrementGermIndex = () => {
+    setGermImageIndex((prevIndex) => (prevIndex + 1) % germImages.length);
   };
 
 
@@ -124,6 +131,9 @@ const WebcamComponent = () => {
     }
   };
 
+
+
+
   const toggleFreeze = () => {
     if (!isFrozen) {
       videoRef.current.pause();
@@ -141,28 +151,18 @@ const WebcamComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (!showWelcome && model) detectHands();
-  }, [showWelcome, model]);
-
-  useEffect(() => {
     if (predictions && predictions.length > 0) {
       updateGermLandmarks(predictions[0].landmarks.length);
       drawHands();
     }
   }, [germCount, predictions]);
 
-  useEffect(() => {
-    const newIndex = Math.floor(Math.random() * germImages.length);
-    setGermImageIndex(newIndex);
-  }, [germCount]);
-
 
   return (
     <div className="video-container">
       {showWelcome ? (
         <div className="welcome-screen">
-          <h1>Germs Scanner</h1>
-          <button onClick={startWebcam}>Start Webcam</button>
+          <button onClick={startWebcam}>START NOW 🠊</button>
         </div>
       ) : (
         <>
@@ -170,7 +170,7 @@ const WebcamComponent = () => {
           <canvas ref={canvasRef} width="640" height="480"></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
-            <div className="toast">Found {germCount} germs!</div>
+             germCount == 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast">Found {germCount} germs!</div>)
           ) : (
             <div className="slider">
               {/* Number of Germs: {germCount} */}
@@ -184,17 +184,26 @@ const WebcamComponent = () => {
             </div>
           )}
           {isFrozen ? (
-            <button onClick={toggleFreeze}>Retry</button>
+            <>
+            <button onClick={toggleFreeze}>TRY IT AGAIN</button>
+            {germCount == 0 && <Confetti /> }
+            </>
           ) : (
             <>
-            <div className='backdrop'></div>
-              <button className="freeze-button" onClick={toggleFreeze}>
+              <div className='backdrop'></div>
+
+              <button
+                className="germButton"
+                style={{ backgroundImage: `url(${germImages[germImageIndex]})` }}
+                onClick={incrementGermIndex}
+              />
+
+
+              <button className="freezeButton" onClick={toggleFreeze}>
               </button>
 
               <button id="toggleCameraBtn" onclick={toggleCamera}>
-                {/* Toggle to {facingMode === 'user' ? 'Back Camera' : 'Front Camera'} */}
 
-                <div class="cameraIcon"></div>
               </button>
 
             </>
