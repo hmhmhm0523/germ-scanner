@@ -172,8 +172,8 @@ const WebcamComponent = () => {
           {isFrozen ? (
             <div className="toast">Found {germCount} germs!</div>
           ) : (
-            <label>
-              Number of Germs: {germCount}
+            <div className="slider">
+              {/* Number of Germs: {germCount} */}
               <input
                 type="range"
                 min="0"
@@ -181,18 +181,22 @@ const WebcamComponent = () => {
                 value={germCount}
                 onChange={(e) => setGermCount(Number(e.target.value))}
               />
-            </label>
+            </div>
           )}
           {isFrozen ? (
             <button onClick={toggleFreeze}>Retry</button>
           ) : (
             <>
+            <div className='backdrop'></div>
               <button className="freeze-button" onClick={toggleFreeze}>
-                Freeze
               </button>
-              <button onClick={toggleCamera}>
-                Toggle to {facingMode === 'user' ? 'Back Camera' : 'Front Camera'}
+
+              <button id="toggleCameraBtn" onclick={toggleCamera}>
+                {/* Toggle to {facingMode === 'user' ? 'Back Camera' : 'Front Camera'} */}
+
+                <div class="cameraIcon"></div>
               </button>
+
             </>
           )}
 
