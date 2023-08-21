@@ -82,8 +82,7 @@ const WebcamComponent = () => {
     try {
       const constraints = {
         video: {
-            facingMode: facingMode,
-            ...(facingMode.exact === 'environment' && { torch: true }) // Only activate torch for back camera
+          facingMode: 'environment'
         }
     };
     
@@ -93,7 +92,6 @@ const WebcamComponent = () => {
 
       // Set video and canvas dimensions once metadata is loaded
       videoRef.current.onloadedmetadata = (e) => {
-        console.log(e);
         videoRef.current.width = e.target.videoWidth;
         videoRef.current.height = e.target.videoHeight;
         canvasRef.current.width = e.target.videoWidth;
@@ -116,7 +114,7 @@ const WebcamComponent = () => {
 
   const toggleCamera = async () => {
     // Toggle between 'user' and 'environment'
-    const newFacingMode = facingMode === 'environment' ? { exact: 'user' } : { exact: 'environment' };
+    const newFacingMode = facingMode.exact === 'environment' ? { exact: 'user' } : { exact: 'environment' };
     setFacingMode(newFacingMode);
 
     // Stop all tracks of the current stream
