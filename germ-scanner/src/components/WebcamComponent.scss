@@ -183,21 +183,25 @@ button.freezeButton {
 
 .toast {
   font-size: 2rem; // Adjust size as needed
-  font-weight: bold;
   position: fixed;
-  top: 10%;
+  top: 5%;
   color: #ffffff; // White text
   text-shadow: 2px 2px 4px #212121; // Text shadow for depth
-  background: linear-gradient(to right, #02831c, #02831c); // Gradient background
-  border: 3px solid #3bff14; // Thick pink border
+
   border-radius: 20px; // Rounded corners
   padding: 20px 40px; // Padding for spacing
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); // Shadow for 3D effect
   animation: bounce 1s infinite; // Bouncing animation
   z-index: 1000;
 
-  span {
-    font-size: 30px;
+  &.dirty {
+    background: linear-gradient(to right, #b55c08, #c93d0a); // Gradient background
+    border: 3px solid #ffeb14; // Thick pink border
+  }
+
+  &.clean {
+    background: linear-gradient(to right, #02831c, #0b641d); // Gradient background
+    border: 3px solid #3bff14; 
   }
 }
 

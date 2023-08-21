@@ -180,7 +180,7 @@ const WebcamComponent = () => {
           <canvas ref={canvasRef} ></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
-            germCount === 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
+            germCount === 0 ? (<div className="toast clean">✓ Your Hands are clean!</div>) : (<div className="toast dirty">⚠ Germs are detected!</div>)
           ) : (
             <div className="slider">
               <input
