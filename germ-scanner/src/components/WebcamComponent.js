@@ -84,8 +84,8 @@ const WebcamComponent = () => {
         video: {
           facingMode: facingMode.exact
         }
-    };
-    
+      };
+
 
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
