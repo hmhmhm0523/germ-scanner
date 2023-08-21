@@ -83,7 +83,8 @@ const WebcamComponent = () => {
       const constraints = {
         video: {
             facingMode: facingMode.exact,
-            torch: facingMode.exact === 'environment' // Only activate torch for back camera
+            advanced: [{ torch: true }]
+            // torch: facingMode.exact === 'environment' // Only activate torch for back camera
         }
     };
     
