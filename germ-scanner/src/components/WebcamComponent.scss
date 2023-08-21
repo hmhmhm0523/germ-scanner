@@ -127,7 +127,7 @@ canvas {
 }
 
 /* For wide screens (e.g., 16:9 aspect ratio) */
-@media (min-aspect-ratio: 16/9) {
+@media (min-aspect-ratio: 4/3) {
   .welcome-screen {
     background-image: url('../assets/GermScannerBG_hz.svg');
 
@@ -135,7 +135,7 @@ canvas {
 }
 
 /* For tall screens (e.g., 9:16 aspect ratio) */
-@media (max-aspect-ratio: 9/16) {
+@media (max-aspect-ratio: 3/4) {
   .welcome-screen {
     background-image: url('../assets/GermScannerBG.svg');
 

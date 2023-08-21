@@ -166,11 +166,11 @@ const WebcamComponent = () => {
         </div>
       ) : (
         <>
-          <video ref={videoRef} width="640" height="480"></video>
+          <video playsinline ref={videoRef} width="640" height="480"></video>
           <canvas ref={canvasRef} width="640" height="480"></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
-             germCount == 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
+             germCount === 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
           ) : (
             <div className="slider">
               {/* Number of Germs: {germCount} */}
@@ -186,7 +186,7 @@ const WebcamComponent = () => {
           {isFrozen ? (
             <>
             <button onClick={toggleFreeze}>TRY IT AGAIN</button>
-            {germCount == 0 && <Confetti /> }
+            {germCount === 0 && <Confetti /> }
             </>
           ) : (
             <>
