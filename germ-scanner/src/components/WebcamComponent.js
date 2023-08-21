@@ -57,28 +57,29 @@ const WebcamComponent = () => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous drawings
-  
-  const cornerLength = 20;  // Define the length of the corner strokes
-  const cornerWidth = 3;    // Define the width of the corner strokes
-  const margin = 50;        // Define the margin for bounding box shrinkage
-  
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous drawings
 
-    if(isFrozen) {
-    predictions.forEach(prediction => {
-      germLandmarkIndices.forEach(index => {
-        const point = prediction.landmarks[index];
-        const img = document.createElement('img');
-        img.src = germImages[germImageIndex];
-        img.style.position = 'absolute';
-        img.style.left = `${(point[0] - videoRef.current.width / 2) * ScaleFactor + (containerWidth / 2)}px`;
-        img.style.top = `${(point[1] - videoRef.current.height / 2) * ScaleFactor + (containerHeight / 2)}px`;
-        img.style.transform = 'translate(-50%, -50%)';
-        img.className = 'germImage';
-        container.appendChild(img);
+    const cornerLength = 30;  // Define the length of the corner strokes
+    const cornerWidth = 4;    // Define the width of the corner strokes
+    const margin = 40;        // Define the margin for bounding box shrinkage
+    const cornerRadius = 10;   // Define the radius for the rounded corners
+
+
+    if (isFrozen) {
+      predictions.forEach(prediction => {
+        germLandmarkIndices.forEach(index => {
+          const point = prediction.landmarks[index];
+          const img = document.createElement('img');
+          img.src = germImages[germImageIndex];
+          img.style.position = 'absolute';
+          img.style.left = `${(point[0] - videoRef.current.width / 2) * ScaleFactor + (containerWidth / 2)}px`;
+          img.style.top = `${(point[1] - videoRef.current.height / 2) * ScaleFactor + (containerHeight / 2)}px`;
+          img.style.transform = 'translate(-50%, -50%)';
+          img.className = 'germImage';
+          container.appendChild(img);
+        });
       });
-    });
-  }
+    }
     else {
       predictions.forEach(prediction => {
         // Adjust the boundingBox with the margin
@@ -86,38 +87,39 @@ const WebcamComponent = () => {
           topLeft: [prediction.boundingBox.topLeft[0] + margin, prediction.boundingBox.topLeft[1] + margin],
           bottomRight: [prediction.boundingBox.bottomRight[0] - margin, prediction.boundingBox.bottomRight[1] - margin]
         };
-  
+
         ctx.strokeStyle = 'white';
         ctx.lineWidth = cornerWidth;
-  
+
         // Top-left corner
         ctx.beginPath();
         ctx.moveTo(boundingBox.topLeft[0], boundingBox.topLeft[1] + cornerLength);
-        ctx.lineTo(boundingBox.topLeft[0], boundingBox.topLeft[1]);
+        ctx.arcTo(boundingBox.topLeft[0], boundingBox.topLeft[1], boundingBox.topLeft[0] + cornerLength, boundingBox.topLeft[1], cornerRadius);
         ctx.lineTo(boundingBox.topLeft[0] + cornerLength, boundingBox.topLeft[1]);
         ctx.stroke();
-  
+
         // Top-right corner
         ctx.beginPath();
         ctx.moveTo(boundingBox.bottomRight[0] - cornerLength, boundingBox.topLeft[1]);
-        ctx.lineTo(boundingBox.bottomRight[0], boundingBox.topLeft[1]);
+        ctx.arcTo(boundingBox.bottomRight[0], boundingBox.topLeft[1], boundingBox.bottomRight[0], boundingBox.topLeft[1] + cornerLength, cornerRadius);
         ctx.lineTo(boundingBox.bottomRight[0], boundingBox.topLeft[1] + cornerLength);
         ctx.stroke();
-  
+
         // Bottom-right corner
         ctx.beginPath();
         ctx.moveTo(boundingBox.bottomRight[0], boundingBox.bottomRight[1] - cornerLength);
-        ctx.lineTo(boundingBox.bottomRight[0], boundingBox.bottomRight[1]);
+        ctx.arcTo(boundingBox.bottomRight[0], boundingBox.bottomRight[1], boundingBox.bottomRight[0] - cornerLength, boundingBox.bottomRight[1], cornerRadius);
         ctx.lineTo(boundingBox.bottomRight[0] - cornerLength, boundingBox.bottomRight[1]);
         ctx.stroke();
-  
+
         // Bottom-left corner
         ctx.beginPath();
         ctx.moveTo(boundingBox.topLeft[0] + cornerLength, boundingBox.bottomRight[1]);
-        ctx.lineTo(boundingBox.topLeft[0], boundingBox.bottomRight[1]);
+        ctx.arcTo(boundingBox.topLeft[0], boundingBox.bottomRight[1], boundingBox.topLeft[0], boundingBox.bottomRight[1] - cornerLength, cornerRadius);
         ctx.lineTo(boundingBox.topLeft[0], boundingBox.bottomRight[1] - cornerLength);
         ctx.stroke();
       });
+
     }
   };
 
