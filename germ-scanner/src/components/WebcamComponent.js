@@ -166,7 +166,7 @@ const WebcamComponent = () => {
         </div>
       ) : (
         <>
-          <video ref={videoRef} width="640" height="480" playsinline></video>
+          <video ref={videoRef} width="640" height="481" playsInline></video>
           <canvas ref={canvasRef} width="640" height="480"></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (

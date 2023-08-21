@@ -218,6 +218,9 @@ button.freezeButton:hover {
 .toast {
   font-size: 2rem; /* Adjust size as needed */
   font-weight: bold;
+  position: fixed;
+
+  top: 10%;
   color: #ffffff; /* White text */
   text-shadow: 2px 2px 4px #000000; /* Text shadow for depth */
   background: linear-gradient(to right, #02831c, #02b692); /* Gradient background */
