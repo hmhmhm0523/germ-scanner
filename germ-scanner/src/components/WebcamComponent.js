@@ -90,13 +90,14 @@ const WebcamComponent = () => {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
 
-   // Set video and canvas dimensions once metadata is loaded
-   videoRef.current.onloadedmetadata = (e) => {
-    videoRef.current.width = e.target.videoWidth;
-    videoRef.current.height = e.target.videoHeight;
-    canvasRef.current.width = e.target.videoWidth;
-    canvasRef.current.height = e.target.videoHeight;
-};
+      // Set video and canvas dimensions once metadata is loaded
+      videoRef.current.onloadedmetadata = (e) => {
+        console.log(e);
+        videoRef.current.width = e.target.videoWidth;
+        videoRef.current.height = e.target.videoHeight;
+        canvasRef.current.width = e.target.videoWidth;
+        canvasRef.current.height = e.target.videoHeight;
+      };
 
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
@@ -114,7 +115,7 @@ const WebcamComponent = () => {
 
   const toggleCamera = async () => {
     // Toggle between 'user' and 'environment'
-    const newFacingMode = facingMode === 'user' ? 'environment' : 'user';
+    const newFacingMode = facingMode === 'user' ? { exact: 'environment' } : { exact: 'user' };
     setFacingMode(newFacingMode);
 
     // Stop all tracks of the current stream
@@ -174,14 +175,13 @@ const WebcamComponent = () => {
         </div>
       ) : (
         <>
-          <video ref={videoRef}  playsInline></video>
+          <video ref={videoRef} playsInline></video>
           <canvas ref={canvasRef} ></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
             germCount === 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
           ) : (
             <div className="slider">
-              {/* Number of Germs: {germCount} */}
               <input
                 type="range"
                 min="0"
@@ -193,7 +193,7 @@ const WebcamComponent = () => {
           )}
           {isFrozen ? (
             <>
-              <button onClick={toggleFreeze}>TRY IT AGAIN</button>
+              <button onClick={toggleFreeze}>⟳ TRY IT AGAIN</button>
               {germCount === 0 && <Confetti />}
             </>
           ) : (
