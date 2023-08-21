@@ -28,7 +28,7 @@ const WebcamComponent = () => {
   const [predictions, setPredictions] = useState([]);
   const [germLandmarkIndices, setGermLandmarkIndices] = useState([]);
   const [germImageIndex, setGermImageIndex] = useState(0);
-  const [facingMode, setFacingMode] = useState('environment'); // 'user' for front, 'environment' for back
+  const [facingMode, setFacingMode] = useState({ exact: 'environment' });
 
 
 
@@ -82,8 +82,8 @@ const WebcamComponent = () => {
     try {
       const constraints = {
         video: {
-            facingMode: facingMode.environment,
-            torch: facingMode.exact === 'environment' // Only activate torch for back camera
+            facingMode: facingMode,
+            ...(facingMode.exact === 'environment' && { torch: true }) // Only activate torch for back camera
         }
     };
     
