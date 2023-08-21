@@ -116,7 +116,7 @@ const WebcamComponent = () => {
 
   const toggleCamera = async () => {
     // Toggle between 'user' and 'environment'
-    const newFacingMode = facingMode === 'user' ? { exact: 'environment' } : { exact: 'user' };
+    const newFacingMode = facingMode === 'environment' ? { exact: 'user' } : { exact: 'environment' };
     setFacingMode(newFacingMode);
 
     // Stop all tracks of the current stream
