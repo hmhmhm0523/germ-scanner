@@ -51,7 +51,7 @@ const WebcamComponent = () => {
     const container = document.querySelector('.video-container');
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
-    const ScaleFactor = containerWidth / containerHeight > 640 / 480 ? containerWidth / 640 : containerHeight / 480;
+    const ScaleFactor = containerWidth / containerHeight > videoRef.current.width / videoRef.current.height ? containerWidth / videoRef.current.width : containerHeight / videoRef.current.height;
 
     document.querySelectorAll('.germImage').forEach(img => img.remove());
 
@@ -61,8 +61,8 @@ const WebcamComponent = () => {
         const img = document.createElement('img');
         img.src = germImages[germImageIndex];
         img.style.position = 'absolute';
-        img.style.left = `${(point[0] - 640 / 2) * ScaleFactor + (containerWidth / 2)}px`;
-        img.style.top = `${(point[1] - 480 / 2) * ScaleFactor + (containerHeight / 2)}px`;
+        img.style.left = `${(point[0] - videoRef.current.width / 2) * ScaleFactor + (containerWidth / 2)}px`;
+        img.style.top = `${(point[1] - videoRef.current.height / 2) * ScaleFactor + (containerHeight / 2)}px`;
         img.style.transform = 'translate(-50%, -50%)';
         img.className = 'germImage';
         container.appendChild(img);
@@ -89,6 +89,14 @@ const WebcamComponent = () => {
 
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
+
+   // Set video and canvas dimensions once metadata is loaded
+   videoRef.current.onloadedmetadata = (e) => {
+    videoRef.current.width = e.target.videoWidth;
+    videoRef.current.height = e.target.videoHeight;
+    canvasRef.current.width = e.target.videoWidth;
+    canvasRef.current.height = e.target.videoHeight;
+};
 
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
@@ -166,8 +174,8 @@ const WebcamComponent = () => {
         </div>
       ) : (
         <>
-          <video ref={videoRef} width="640" height="481" playsInline></video>
-          <canvas ref={canvasRef} width="640" height="480"></canvas>
+          <video ref={videoRef}  playsInline></video>
+          <canvas ref={canvasRef} ></canvas>
           {!isFrozen && <div className="laser-scanner"></div>}
           {isFrozen ? (
             germCount === 0 ? (<div className="toast">Your Hands are clean!</div>) : (<div className="toast"><span>{germCount}</span> germs are detected!</div>)
