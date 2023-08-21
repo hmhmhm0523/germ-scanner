@@ -83,8 +83,7 @@ const WebcamComponent = () => {
       const constraints = {
         video: {
             facingMode: facingMode.exact,
-            advanced: [{ torch: true }]
-            // torch: facingMode.exact === 'environment' // Only activate torch for back camera
+            torch: facingMode.exact === 'environment' // Only activate torch for back camera
         }
     };
     
@@ -117,7 +116,7 @@ const WebcamComponent = () => {
 
   const toggleCamera = async () => {
     // Toggle between 'user' and 'environment'
-    const newFacingMode = facingMode === 'user' ? { exact: 'environment' } : { exact: 'user' };
+    const newFacingMode = facingMode === 'environment' ? { exact: 'environment' } : { exact: 'user' };
     setFacingMode(newFacingMode);
 
     // Stop all tracks of the current stream

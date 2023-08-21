@@ -1,5 +1,3 @@
-// src/components/WebcamComponent.scss
-
 div {
   display: flex;
   flex-direction: column;
@@ -13,15 +11,14 @@ div {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, all 0.2 ease;
     z-index: 100;
     position: fixed;
     bottom: 10%;
     font-size: 24px;
-    transition: all 0.2 ease;
-    
+
     &:hover {
-      transform: scale(0.95); /* Slightly increase the size when hovered for a playful effect */
+      transform: scale(0.95); // Slightly increase the size when hovered for a playful effect
     }
   }
 }
@@ -60,10 +57,10 @@ canvas {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px; /* Adjust based on desired thickness of the laser line */
+  height: 4px; // Adjust based on desired thickness of the laser line
   background: linear-gradient(to right, transparent, #00ff00, transparent);
-  opacity: 0.7; /* Adjust for desired transparency */
-  animation: scan 3s linear infinite; /* 3s duration, adjust as needed */
+  opacity: 0.7; // Adjust for desired transparency
+  animation: scan 3s linear infinite; // 3s duration, adjust as needed
   transition: opacity 0.5s ease-out;
 }
 
@@ -82,68 +79,50 @@ canvas {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.7); // semi-transparent black
   color: white;
   font-size: 2em;
   text-align: center;
-  z-index: 100; /* to ensure it's above other elements */
-  // background-image: url('../assets/GermScannerBG.svg');
+  z-index: 100; // to ensure it's above other elements
+  background-image: url("../assets/GermScannerBG_sq.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-}
+  transition: background-image 0.3s ease-in-out; // Smooth transition between background changes
 
-.welcome-screen button {
-  background-color: #FFD700; /* Bright yellow */
-  padding: 20px 40px;
-  border-radius: 50px; /* Very rounded borders */
-  font-size: 34px;
-  color: #FFFFFF; /* White text */
-  border: none;
-  cursor: pointer;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* A light shadow for depth */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3 ease; /* Smooth transition for press animation */
-  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; /* Fun fonts */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Slight shadow on the text for depth */
+  button {
+    background-color: #ffd700; // Bright yellow
+    padding: 20px 40px;
+    border-radius: 50px; // Very rounded borders
+    font-size: 34px;
+    color: #ffffff; // White text
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); // A light shadow for depth
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3 ease; // Smooth transition for press animation
+    font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif; // Fun fonts
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); // Slight shadow on the text for depth
 
+    &:hover {
+      background-color: #ff6f00; // Bright yellow
+    }
 
-  &:hover {
-  background-color: #ff6f00; /* Bright yellow */
+    &:active {
+      transform: scale(0.95); // Slightly shrink the button
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); // Reduce the shadow size
+    }
+  }
 
+  // For wide screens (e.g., 16:9 aspect ratio)
+  @media (min-aspect-ratio: 4/3) {
+    background-image: url("../assets/GermScannerBG_hz.svg");
+  }
+
+  // For tall screens (e.g., 9:16 aspect ratio)
+  @media (max-aspect-ratio: 3/4) {
+    background-image: url("../assets/GermScannerBG.svg");
   }
 }
-
-/* Animation when the button is pressed/clicked */
-.welcome-screen button:active {
-  transform: scale(0.95); /* Slightly shrink the button */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Reduce the shadow size */
-}
-
-.welcome-screen {
-  /* Default background image (for standard aspect ratios) */
-  background-image: url('../assets/GermScannerBG_sq.svg');
-
-  transition: background-image 0.3s ease-in-out; /* Smooth transition between background changes */
-}
-
-/* For wide screens (e.g., 16:9 aspect ratio) */
-@media (min-aspect-ratio: 4/3) {
-  .welcome-screen {
-    background-image: url('../assets/GermScannerBG_hz.svg');
-
-  }
-}
-
-/* For tall screens (e.g., 9:16 aspect ratio) */
-@media (max-aspect-ratio: 3/4) {
-  .welcome-screen {
-    background-image: url('../assets/GermScannerBG.svg');
-
-  }
-}
-
-
-
 
 input[type="range"] {
   -webkit-appearance: none;
@@ -152,69 +131,69 @@ input[type="range"] {
   border-radius: 5px;
   background: gray;
   outline: none;
-}
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #026CCF;
-  cursor: pointer;
-  border: 3px solid white;
-  transition: transform 0.2s;
-}
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #026ccf;
+    cursor: pointer;
+    border: 3px solid white;
+    transition: transform 0.2s;
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1); /* Slightly increase the size when hovered for a playful effect */
-}
+    &:hover {
+      transform: scale(1.1); // Slightly increase the size when hovered for a playful effect
+    }
+  }
 
-input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: blue;
-  cursor: pointer;
-  border: 3px solid #ffd700;
+  &::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: blue;
+    cursor: pointer;
+    border: 3px solid #ffd700;
+  }
 }
 
 button.freezeButton {
   background-color: white;
-  border: 3px solid rgba(255, 255, 255, 0.6); /* Semi-transparent white for the outer circle */
+  border: 3px solid rgba(255, 255, 255, 0.6); // Semi-transparent white for the outer circle
   width: 70px;
   height: 70px;
-  border-radius: 50%; /* Make it a circle */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  outline: 2px solid white; /* Remove default focus outline */
+  border-radius: 50%; // Make it a circle
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow for depth
+  outline: 2px solid white; // Remove default focus outline
   outline-offset: 4px;
   cursor: pointer;
-  transition: transform 0.1s ease; /* For a subtle click effect */
-  position: fixed; /* Fixed position */
-  bottom: 10%; /* Position it 10% from the bottom */
-  left: 50%; /* Center it horizontally */
-  transform: translateX(-50%); /* Adjust for exact centering */
-  z-index: 1000; /* Make sure it's above other elements */
+  transition: transform 0.1s ease; // For a subtle click effect
+  position: fixed; // Fixed position
+  bottom: 10%; // Position it 10% from the bottom
+  left: 50%; // Center it horizontally
+  transform: translateX(-50%); // Adjust for exact centering
+  z-index: 1000; // Make sure it's above other elements
   padding: 0;
-}
 
-button.freezeButton:hover {
-  transform: translateX(-50%) scale(0.95); /* Combine translate and scale */
+  &:hover {
+    transform: translateX(-50%) scale(0.95); // Combine translate and scale
+  }
 }
 
 .toast {
-  font-size: 2rem; /* Adjust size as needed */
+  font-size: 2rem; // Adjust size as needed
   font-weight: bold;
   position: fixed;
   top: 10%;
-  color: #ffffff; /* White text */
-  text-shadow: 2px 2px 4px #212121; /* Text shadow for depth */
-  background: linear-gradient(to right, #02831c, #02831c); /* Gradient background */
-  border: 3px solid #3bff14; /* Thick pink border */
-  border-radius: 20px; /* Rounded corners */
-  padding: 20px 40px; /* Padding for spacing */
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
-  animation: bounce 1s infinite; /* Bouncing animation */
+  color: #ffffff; // White text
+  text-shadow: 2px 2px 4px #212121; // Text shadow for depth
+  background: linear-gradient(to right, #02831c, #02831c); // Gradient background
+  border: 3px solid #3bff14; // Thick pink border
+  border-radius: 20px; // Rounded corners
+  padding: 20px 40px; // Padding for spacing
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); // Shadow for 3D effect
+  animation: bounce 1s infinite; // Bouncing animation
   z-index: 1000;
 
   span {
@@ -222,19 +201,22 @@ button.freezeButton:hover {
   }
 }
 
-/* Bouncing animation */
+// Bouncing animation
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
   }
   40% {
-      transform: translateY(-10px);
+    transform: translateY(-10px);
   }
   60% {
-      transform: translateY(-5px);
+    transform: translateY(-5px);
   }
 }
-
 
 #toggleCameraBtn {
   width: 70px;
@@ -256,9 +238,7 @@ button.freezeButton:hover {
   padding: 0;
 }
 
-
 .slider {
-
   width: 80vw;
   outline: none; /* Remove default focus outline */
   cursor: pointer;
@@ -269,14 +249,13 @@ button.freezeButton:hover {
   z-index: 1000; /* Make sure it's above other elements */
 }
 
-
 .backdrop {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100vw;
   height: 22vh;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .germButton {
@@ -290,7 +269,7 @@ button.freezeButton:hover {
   cursor: pointer;
   left: 10vw;
   bottom: 10vh;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 6px;
   padding: 0;
 }
