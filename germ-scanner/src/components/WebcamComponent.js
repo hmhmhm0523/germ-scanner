@@ -82,10 +82,11 @@ const WebcamComponent = () => {
     try {
       const constraints = {
         video: {
-          facingMode: facingMode,
-          torch: facingMode === 'environment' // Only activate torch for back camera
+            facingMode: facingMode.exact,
+            torch: facingMode.exact === 'environment' // Only activate torch for back camera
         }
-      };
+    };
+    
 
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       videoRef.current.srcObject = stream;
