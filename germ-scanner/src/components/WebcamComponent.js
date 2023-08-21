@@ -82,7 +82,7 @@ const WebcamComponent = () => {
     try {
       const constraints = {
         video: {
-          facingMode: 'environment'
+          facingMode: facingMode.exact
         }
     };
     
