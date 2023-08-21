@@ -55,6 +55,16 @@ const WebcamComponent = () => {
 
     document.querySelectorAll('.germImage').forEach(img => img.remove());
 
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous drawings
+  
+  const cornerLength = 20;  // Define the length of the corner strokes
+  const cornerWidth = 3;    // Define the width of the corner strokes
+  const margin = 50;        // Define the margin for bounding box shrinkage
+  
+
+    if(isFrozen) {
     predictions.forEach(prediction => {
       germLandmarkIndices.forEach(index => {
         const point = prediction.landmarks[index];
@@ -68,6 +78,47 @@ const WebcamComponent = () => {
         container.appendChild(img);
       });
     });
+  }
+    else {
+      predictions.forEach(prediction => {
+        // Adjust the boundingBox with the margin
+        const boundingBox = {
+          topLeft: [prediction.boundingBox.topLeft[0] + margin, prediction.boundingBox.topLeft[1] + margin],
+          bottomRight: [prediction.boundingBox.bottomRight[0] - margin, prediction.boundingBox.bottomRight[1] - margin]
+        };
+  
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = cornerWidth;
+  
+        // Top-left corner
+        ctx.beginPath();
+        ctx.moveTo(boundingBox.topLeft[0], boundingBox.topLeft[1] + cornerLength);
+        ctx.lineTo(boundingBox.topLeft[0], boundingBox.topLeft[1]);
+        ctx.lineTo(boundingBox.topLeft[0] + cornerLength, boundingBox.topLeft[1]);
+        ctx.stroke();
+  
+        // Top-right corner
+        ctx.beginPath();
+        ctx.moveTo(boundingBox.bottomRight[0] - cornerLength, boundingBox.topLeft[1]);
+        ctx.lineTo(boundingBox.bottomRight[0], boundingBox.topLeft[1]);
+        ctx.lineTo(boundingBox.bottomRight[0], boundingBox.topLeft[1] + cornerLength);
+        ctx.stroke();
+  
+        // Bottom-right corner
+        ctx.beginPath();
+        ctx.moveTo(boundingBox.bottomRight[0], boundingBox.bottomRight[1] - cornerLength);
+        ctx.lineTo(boundingBox.bottomRight[0], boundingBox.bottomRight[1]);
+        ctx.lineTo(boundingBox.bottomRight[0] - cornerLength, boundingBox.bottomRight[1]);
+        ctx.stroke();
+  
+        // Bottom-left corner
+        ctx.beginPath();
+        ctx.moveTo(boundingBox.topLeft[0] + cornerLength, boundingBox.bottomRight[1]);
+        ctx.lineTo(boundingBox.topLeft[0], boundingBox.bottomRight[1]);
+        ctx.lineTo(boundingBox.topLeft[0], boundingBox.bottomRight[1] - cornerLength);
+        ctx.stroke();
+      });
+    }
   };
 
   const shuffleArray = (array) => {
