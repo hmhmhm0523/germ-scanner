@@ -211,7 +211,7 @@ const WebcamComponent = () => {
               <button className="freezeButton" onClick={toggleFreeze}>
               </button>
 
-              <button id="toggleCameraBtn" onclick={toggleCamera}>
+              <button id="toggleCameraBtn" onClick={toggleCamera}>
 
               </button>
 
