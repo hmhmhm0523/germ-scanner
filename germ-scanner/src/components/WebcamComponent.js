@@ -28,7 +28,7 @@ const WebcamComponent = () => {
   const [predictions, setPredictions] = useState([]);
   const [germLandmarkIndices, setGermLandmarkIndices] = useState([]);
   const [germImageIndex, setGermImageIndex] = useState(0);
-  const [facingMode, setFacingMode] = useState('user'); // 'user' for front, 'environment' for back
+  const [facingMode, setFacingMode] = useState('environment'); // 'user' for front, 'environment' for back
 
 
 
@@ -116,7 +116,7 @@ const WebcamComponent = () => {
 
   const toggleCamera = async () => {
     // Toggle between 'user' and 'environment'
-    const newFacingMode = facingMode === 'environment' ? { exact: 'environment' } : { exact: 'user' };
+    const newFacingMode = facingMode === 'user' ? { exact: 'environment' } : { exact: 'user' };
     setFacingMode(newFacingMode);
 
     // Stop all tracks of the current stream

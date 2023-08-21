@@ -2,7 +2,7 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
 
   button {
     padding: 20px 60px;
@@ -197,7 +197,7 @@ button.freezeButton {
   z-index: 1000;
 
   span {
-    font-size: 60px;
+    font-size: 30px;
   }
 }
 
